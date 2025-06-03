@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nizami's Casino Deluxe</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Nizami's Casino <span class="deluxe-text">Deluxe</span> <span class="neon-glow-fast">✨</span></h1>
+        <div class="player-info">
+            <span>Balans: $<span id="playerBalance">1000</span></span>
+            <button id="addFundsButton" class="add-funds-btn"><i class="fas fa-plus-circle"></i> Balans Artır</button>
+        </div>
+    </header>
+
+    <nav class="game-tabs">
+        <button class="tab-button active" data-game="slot-machine"><i class="fas fa-dice-d20"></i> Slot Maşını</button>
+        <button class="tab-button" data-game="roulette"><i class="fas fa-dharmachakra"></i> Ruletka</button>
+        <button class="tab-button" data-game="leaderboard-section"><i class="fas fa-trophy"></i> Liderlər Cədvəli</button>
+    </nav>
+
+    <main class="game-container">
+        <!-- Slot Machine -->
+        <div id="slot-machine" class="game-content active">
+            <h2><i class="fas fa-dice-d20 neon-icon"></i> Slot Maşını</h2>
+            <div class="slot-machine-reels">
+                <div class="reel" id="reel1">💎</div>
+                <div class="reel" id="reel2">🍒</div>
+                <div class="reel" id="reel3">💰</div>
+            </div>
+            <div class="controls">
+                <label for="slotBet">Mərc:</label>
+                <input type="number" id="slotBet" value="10" min="1">
+                <button id="spinButton" class="action-button"><i class="fas fa-play"></i> Fırlat!</button>
+            </div>
+            <p id="slotMessage" class="message"></p>
+        </div>
+
+        <!-- Roulette -->
+        <div id="roulette" class="game-content">
+            <h2><i class="fas fa-dharmachakra neon-icon"></i> Ruletka</h2>
+            <div class="roulette-game-area">
+                <div class="roulette-wheel-container">
+                    <svg id="rouletteWheelSVG" width="300" height="300" viewBox="0 0 300 300">
+                        <g id="rouletteWheelGroup" transform="translate(150,150)">
+                            <!-- Seqmentlər və nömrələr JS tərəfindən yaradılacaq -->
+                        </g>
+                    </svg>
+                    <div class="wheel-pointer"></div>
+                </div>
+                <div id="rouletteResult" class="message">Nəticə gözlənilir...</div>
+            </div>
+            <div class="roulette-controls">
+                <div class="betting-options">
+                    <label for="rouletteBetAmount">Mərc Məbləği:</label>
+                    <input type="number" id="rouletteBetAmount" value="10" min="1">
+                    <p>Mərc et:</p>
+                    <button class="bet-option" data-bet-type="color" data-value="red">Qırmızı</button>
+                    <button class="bet-option" data-bet-type="color" data-value="black">Qara</button>
+                    <button class="bet-option" data-bet-type="parity" data-value="even">Cüt</button>
+                    <button class="bet-option" data-bet-type="parity" data-value="odd">Tək</button>
+                    <br>
+                    <label for="rouletteNumberBet">Nömrəyə Mərc (0-10):</label>
+                    <input type="number" id="rouletteNumberBet" min="0" max="10">
+                </div>
+                <button id="spinRouletteButton" class="action-button"><i class="fas fa-sync-alt"></i> Ruletkanı Fırlat!</button>
+            </div>
+            <p id="rouletteMessage" class="message"></p>
+        </div>
+
+        <!-- Leaderboard -->
+        <div id="leaderboard-section" class="game-content">
+            <h2><i class="fas fa-trophy neon-icon"></i> Liderlər Cədvəli</h2>
+            <button id="resetLeaderboard" class="secondary-button">Cədvəli Sıfırla</button>
+            <table id="leaderboardTable">
+                <thead>
+                    <tr>
+                        <th>Sıra</th>
+                        <th>Oyunçu</th>
+                        <th>Xal</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="add-score-form">
+                <input type="text" id="playerName" placeholder="Adınızı daxil edin">
+                <button id="addPlayerToLeaderboard" class="action-button">Xalımı Əlavə Et</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Funds Modal -->
+    <div id="addFundsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h3><i class="fas fa-credit-card"></i> Balans Artır</h3>
+            <label for="depositAmount">Məbləğ ($):</label>
+            <input type="number" id="depositAmount" min="1" placeholder="100">
+            <label for="cardNumber">Kart Nömrəsi (Fake):</label>
+            <input type="text" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx">
+            <div class="card-details-fake">
+                <div>
+                    <label for="cardExpiry">Bitmə Tarixi (Fake):</label>
+                    <input type="text" id="cardExpiry" placeholder="MM/YY">
+                </div>
+                <div>
+                    <label for="cardCVV">CVV (Fake):</label>
+                    <input type="text" id="cardCVV" placeholder="123">
+                </div>
+            </div>
+            <button id="confirmDepositButton" class="action-button">Depozit Et</button>
+            <p id="modalMessage" class="message small"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Developed by Nizami Tahirov © 2024. All rights reserved.</p>
+    </footer>
+</body>
+</html>
