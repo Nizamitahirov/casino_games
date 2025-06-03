@@ -1,0 +1,594 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lobster&family=Orbitron:wght@400;700&display=swap');
+
+:root {
+    --casino-gold: #FFD700;
+    --casino-gold-darker: #dbae00;
+    --casino-red-vibrant: #FF1E56; /* Neon qırmızı/çəhrayı */
+    --casino-dark-bg: #10002b; /* Dərin bənövşəyi qara */
+    --casino-mid-bg: #240046;
+    --casino-light-text: #f0f0f0;
+    --casino-grey-text: #adb5bd;
+
+    --eagle-green-dark: #3c4d0d;
+    --eagle-green-medium: #5a7a1f;
+    --neon-green: #39FF14;
+    --neon-green-darker: #2fad0f;
+
+    --neon-blue: #00E5FF;
+    --neon-blue-darker: #00b8cc;
+    --neon-pink: #FF00F5;
+
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-border: var(--neon-blue);
+    --input-focus-border: var(--casino-gold);
+
+    --glow-color-blue: rgba(0, 229, 255, 0.7);
+    --glow-color-gold: rgba(255, 215, 0, 0.7);
+    --glow-color-pink: rgba(255, 0, 245, 0.7);
+    --glow-color-green: rgba(57, 255, 20, 0.7);
+
+    --font-primary: 'Roboto', sans-serif;
+    --font-display: 'Orbitron', sans-serif; /* Neon/Tech font */
+    --font-logo: 'Lobster', cursive;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: linear-gradient(135deg, var(--casino-dark-bg) 0%, #3c096c 100%);
+    color: var(--casino-light-text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Yan scrollbarı əngəllə */
+}
+
+header {
+    background-color: rgba(0,0,0,0.5);
+    color: var(--casino-gold);
+    padding: 1em 1.5em;
+    text-align: center;
+    border-bottom: 3px solid var(--neon-blue);
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    position: relative;
+    z-index: 10;
+}
+
+header h1 {
+    font-family: var(--font-logo);
+    font-size: 2.8em;
+    margin: 0;
+    text-shadow: 0 0 5px var(--casino-gold), 0 0 10px var(--casino-gold), 0 0 15px var(--neon-pink);
+    animation: pulsateLogo 3s ease-in-out infinite;
+}
+header h1 .deluxe-text {
+    font-family: var(--font-display);
+    font-size: 0.7em;
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+}
+
+
+.neon-glow-fast {
+    animation: neonFlicker 1.5s infinite alternate;
+}
+
+@keyframes pulsateLogo {
+    0%, 100% { text-shadow: 0 0 5px var(--casino-gold), 0 0 10px var(--neon-pink), 0 0 15px var(--casino-gold); }
+    50% { text-shadow: 0 0 10px var(--casino-gold), 0 0 20px var(--neon-pink), 0 0 30px var(--casino-gold-darker); }
+}
+
+@keyframes neonFlicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px var(--neon-blue),
+      0 0 80px var(--neon-blue),
+      0 0 90px var(--neon-blue),
+      0 0 100px var(--neon-blue),
+      0 0 150px var(--neon-blue);
+    color: #fff;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+    color: var(--neon-blue-darker);
+  }
+}
+
+
+.player-info {
+    font-size: 1.2em;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+#playerBalance {
+    font-weight: bold;
+    color: var(--neon-green);
+    text-shadow: 0 0 5px var(--neon-green);
+}
+
+.add-funds-btn {
+    background: linear-gradient(45deg, var(--neon-green), var(--eagle-green-medium));
+    color: var(--casino-dark-bg);
+    padding: 8px 15px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green);
+}
+.add-funds-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+}
+.add-funds-btn i { margin-right: 5px; }
+
+
+.game-tabs {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.3);
+    padding: 0.7em 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.tab-button {
+    background-color: transparent;
+    color: var(--casino-grey-text);
+    border: 2px solid transparent;
+    border-bottom: 2px solid transparent; /* For active state */
+    padding: 0.8em 1.8em;
+    margin: 0 0.5em;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.1em;
+    font-family: var(--font-display);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+.tab-button i { margin-right: 8px; }
+
+.tab-button:hover {
+    color: var(--neon-blue);
+    border-color: var(--neon-blue-darker);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.tab-button.active {
+    background-color: var(--casino-mid-bg);
+    color: var(--casino-gold);
+    border-color: var(--neon-pink);
+    border-bottom: 2px solid var(--neon-pink);
+    box-shadow: 0 -3px 10px var(--glow-color-pink) inset;
+    text-shadow: 0 0 8px var(--casino-gold);
+}
+
+.game-container {
+    flex-grow: 1;
+    padding: 1.5em; /* Reduced padding for smaller screens */
+    max-width: 1000px; /* Max width for larger screens */
+    width: 95%; /* Responsive width */
+    margin: 20px auto;
+    background-color: rgba(36, 0, 70, 0.8); /* var(--casino-mid-bg) with opacity */
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.6), 0 0 15px var(--glow-color-blue) inset;
+    display: flex; /* For potential internal layout */
+    flex-direction: column;
+}
+
+.game-content {
+    display: none;
+    animation: fadeIn 0.6s ease-in-out;
+    padding: 1em; /* Padding inside game content */
+}
+
+.game-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.game-content h2 {
+    color: var(--casino-gold);
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 2em;
+    font-family: var(--font-display);
+    text-shadow: 0 0 7px var(--casino-gold), 0 0 12px var(--neon-pink);
+}
+.neon-icon {
+    margin-right: 10px;
+    color: var(--neon-blue);
+    text-shadow: 0 0 8px var(--neon-blue);
+}
+
+/* Input and Button Styles */
+input[type="number"], input[type="text"] {
+    padding: 10px 12px;
+    border-radius: 5px;
+    border: 2px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--casino-light-text);
+    font-size: 1em;
+    margin: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 8px var(--glow-color-gold);
+}
+
+label {
+    margin: 5px 10px 5px 0;
+    font-size: 1.1em;
+    color: var(--casino-grey-text);
+}
+
+.action-button, .secondary-button {
+    color: var(--casino-dark-bg);
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family: var(--font-display);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 10px 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.action-button i, .secondary-button i { margin-right: 8px; }
+
+.action-button {
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+    box-shadow: 0 0 8px var(--glow-color-blue), 0 0 15px var(--glow-color-pink);
+}
+.action-button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 12px var(--glow-color-blue), 0 0 25px var(--glow-color-pink);
+}
+.action-button:disabled {
+    background: #555;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+.secondary-button {
+    background: linear-gradient(45deg, var(--eagle-green-medium), var(--neon-green));
+     box-shadow: 0 0 8px var(--glow-color-green);
+}
+.secondary-button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 12px var(--glow-color-green);
+}
+
+
+/* Slot Machine Styles */
+.slot-machine-reels {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    background: rgba(0,0,0,0.3);
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid var(--neon-blue);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.7), 0 0 10px var(--glow-color-blue);
+}
+
+.reel {
+    width: 90px;
+    height: 110px;
+    background-color: var(--casino-dark-bg);
+    border: 3px solid var(--neon-pink);
+    margin: 0 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5em;
+    font-weight: bold;
+    color: var(--casino-light-text);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 8px var(--glow-color-pink) inset;
+    text-shadow: 0 0 5px currentColor; /* Subtle glow for symbols */
+}
+
+.reel.spinning .symbol-track {
+    animation: spinReelAnimation 0.07s linear infinite;
+}
+.reel .symbol-track {
+    position: absolute; top: 0; left: 0; width: 100%;
+    display: flex; flex-direction: column; align-items: center;
+}
+.reel .symbol-track span { height: 110px; line-height: 110px; }
+
+@keyframes spinReelAnimation {
+    from { transform: translateY(0); }
+    to { transform: translateY(-200%); }
+}
+
+.controls { text-align: center; margin-top: 20px; }
+
+/* Roulette Styles */
+.roulette-game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.roulette-wheel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+#rouletteWheelSVG {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 10px var(--glow-color-gold));
+}
+#rouletteWheelGroup {
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth spin */
+}
+.wheel-pointer {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid var(--casino-gold); /* Gold pointer */
+    position: absolute;
+    top: -10px; /* Position above the wheel */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    filter: drop-shadow(0 0 5px var(--casino-gold-darker));
+}
+
+/* SVG segment styles will be set by JS, but text can be styled here */
+#rouletteWheelSVG text {
+    font-family: var(--font-display);
+    font-size: 16px; /* Adjust as needed */
+    font-weight: bold;
+    fill: white; /* Default fill, can be overridden by JS if needed */
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none; /* So they don't interfere with wheel events if any */
+    text-shadow: 1px 1px 2px black;
+}
+
+#rouletteResult {
+    font-size: 1.6em;
+    padding: 10px 15px;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 5px;
+    border: 1px solid var(--neon-blue);
+    min-width: 200px;
+    text-align: center;
+    color: var(--neon-green);
+    text-shadow: 0 0 5px var(--neon-green);
+}
+
+.roulette-controls {
+    text-align: center;
+    margin-top: 15px;
+    width: 100%;
+}
+.roulette-controls .betting-options {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.roulette-controls .bet-option {
+    padding: 10px 18px;
+    font-size: 1em;
+    font-family: var(--font-primary);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    border: 2px solid var(--casino-grey-text);
+    color: var(--casino-grey-text);
+}
+.roulette-controls .bet-option:hover {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+}
+.roulette-controls .bet-option.selected { /* Class to be added by JS */
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 8px var(--glow-color-pink);
+}
+.roulette-controls .bet-option[data-value="red"] { border-color: var(--casino-red-vibrant); }
+.roulette-controls .bet-option[data-value="red"]:hover,
+.roulette-controls .bet-option[data-value="red"].selected { color: var(--casino-red-vibrant); box-shadow: 0 0 8px var(--casino-red-vibrant); }
+
+.roulette-controls .bet-option[data-value="black"] { border-color: #6c757d; }
+.roulette-controls .bet-option[data-value="black"]:hover,
+.roulette-controls .bet-option[data-value="black"].selected { color: #ccc; border-color: #ccc; box-shadow: 0 0 8px #ccc; }
+
+
+/* Message Styles */
+.message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.3em;
+    font-weight: bold;
+    min-height: 1.5em;
+    animation: messageFadeIn 0.5s;
+    font-family: var(--font-display);
+}
+.message.win {
+    color: var(--neon-green);
+    text-shadow: 0 0 8px var(--glow-color-green);
+    animation: winPulse 0.8s infinite alternate;
+}
+.message.lose {
+    color: var(--casino-red-vibrant);
+    text-shadow: 0 0 8px var(--casino-red-vibrant);
+}
+.message.small { font-size: 1em; margin-top: 10px;}
+
+@keyframes messageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes winPulse {
+    from { transform: scale(1); opacity: 0.8; }
+    to { transform: scale(1.05); opacity: 1; }
+}
+
+/* Leaderboard Styles */
+#leaderboard-section { text-align: center; }
+#leaderboardTable {
+    width: 90%;
+    max-width: 600px;
+    margin: 25px auto;
+    border-collapse: collapse;
+    background-color: rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px var(--glow-color-blue);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    overflow: hidden; /* For border-radius */
+}
+#leaderboardTable th, #leaderboardTable td {
+    border-bottom: 1px solid var(--neon-blue-darker);
+    padding: 14px;
+    text-align: left;
+}
+#leaderboardTable th {
+    background-color: var(--neon-blue);
+    color: var(--casino-dark-bg);
+    font-family: var(--font-display);
+    text-shadow: none;
+}
+#leaderboardTable tbody tr:nth-child(even) { background-color: rgba(0, 229, 255, 0.05); }
+#leaderboardTable tbody tr:hover { background-color: rgba(0, 229, 255, 0.15); }
+#leaderboardTable tbody tr td:first-child { text-align: center; font-weight: bold; color: var(--casino-gold); }
+.add-score-form { margin-top: 25px; }
+
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); /* Darker backdrop */
+    animation: fadeInModalBackdrop 0.3s ease-out;
+}
+@keyframes fadeInModalBackdrop { from { background-color: rgba(0,0,0,0); } to { background-color: rgba(0,0,0,0.7); } }
+
+.modal-content {
+    background: linear-gradient(160deg, var(--casino-mid-bg), var(--casino-dark-bg));
+    margin: 10% auto; /* Vertically centered better */
+    padding: 25px 30px;
+    border: 2px solid var(--neon-pink);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 25px var(--glow-color-pink), 0 0 30px rgba(0,0,0,0.5);
+    position: relative;
+    animation: slideInModal 0.4s ease-out;
+}
+@keyframes slideInModal { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-content h3 {
+    color: var(--casino-gold);
+    font-family: var(--font-display);
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8em;
+}
+.modal-content h3 i { color: var(--neon-pink); margin-right: 10px;}
+
+.modal-content label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: var(--casino-grey-text);
+}
+.modal-content input[type="number"], .modal-content input[type="text"] {
+    width: calc(100% - 10px); /* Account for margin */
+    margin-bottom: 10px;
+}
+.card-details-fake {
+    display: flex;
+    gap: 15px;
+}
+.card-details-fake > div {
+    flex: 1;
+}
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+.close-button:hover, .close-button:focus {
+    color: var(--casino-red-vibrant);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+footer {
+    text-align: center;
+    padding: 1.5em;
+    background-color: rgba(0,0,0,0.7);
+    color: var(--casino-grey-text);
+    margin-top: auto;
+    font-size: 0.9em;
+    border-top: 2px solid var(--neon-blue);
+    box-shadow: 0 -4px 15px rgba(0, 229, 255, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header h1 { font-size: 2em; }
+    .player-info { font-size: 1em; flex-direction: column; gap: 10px;}
+    .tab-button { padding: 0.7em 1em; font-size: 0.9em; }
+    .game-container { padding: 1em; width: 98%; }
+    .game-content h2 { font-size: 1.6em; }
+    .reel { width: 70px; height: 90px; font-size: 2.5em; margin: 0 5px;}
+    .slot-machine-reels { padding: 15px;}
+    #rouletteWheelSVG { width: 250px; height: 250px; } /* Smaller wheel */
+    .roulette-wheel-container { width: 250px; height: 250px; }
+    .modal-content { margin: 15% auto; padding: 20px; }
+}
+@media (max-width: 480px) {
+    header h1 { font-size: 1.8em; }
+    .tab-button { padding: 0.6em 0.5em; font-size: 0.8em; margin: 0 2px;}
+    .tab-button i { margin-right: 4px;}
+    .action-button, .secondary-button { font-size: 1em; padding: 10px 15px; }
+    input[type="number"], input[type="text"] { font-size: 0.9em; padding: 8px;}
+    .roulette-controls .betting-options { flex-direction: column; }
+}
